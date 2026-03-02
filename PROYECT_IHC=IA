@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>IA EN LA INTERACCION HUMANO-MAQUINA</title>
+    <style>
+    body {
+        background-color: skyblue;
+        color: black;
+        font-family: 'Cascadia Code', monospace;
+    }
+    h1 {
+        color: darkblue;
+        border-bottom: 3px solid darkblue;
+        display: inline-block;
+    }
+    h2, h3 {
+        color: darkblue;
+    }
+    .contenedor {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0;
+        margin-bottom: 15px;
+    }
+    .contenedor img {
+        width: 200px;
+        border-radius: 10px;
+    }
+    .contenedor p {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0;
+    }
+    </style>
+</head>
+<body>
+
+<h1>INTELIGENCIA ARTIFICIAL (IA)</h1>
+<h2>¿QUE ES LA IA?</h2>
+<p>La IA (inteligencia artificial) es la tecnología que permite que las máquinas imiten ciertas capacidades humanas como aprender, razonar, reconocer imágenes, entender lenguaje y tomar decisiones.</p>
+<img src="https://th.bing.com/th/id/OIP.uZcVAR9mfrLcAikLxFtviQHaEO?w=318&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="IA">
+
+<h3>¿Cómo funciona?</h3>
+<p>La IA utiliza principalmente:
+Algoritmos (conjuntos de reglas matemáticas)
+Datos (mucha información para aprender)
+Modelos de aprendizaje automático (machine learning)
+Un ejemplo importante es el modelo llamado ChatGPT, que usa grandes cantidades de texto para aprender patrones del lenguaje y poder conversar.</p>
+<img src="https://th.bing.com/th/id/OIP.2Ja11QEE48-i5lpcuBVctQHaDh?w=264&h=166&c=7&r=0&o=7&pid=1.7&rm=3" alt="IA2">
+
+<h3>Ejemplos de IA en la vida diaria</h3>
+<p>* Asistentes virtuales como Siri o Alexa</p>
+<p>* Reconocimiento facial en el celular</p>
+<p>* Traducción automática</p>
+<p>* Recomendaciones de Netflix</p>
+<img src="https://th.bing.com/th/id/OIP.eEauSbBRTz0SqF8XPBMqiwHaFQ?w=222&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="IA3">
+
+<h2>Tipos de IA</h2>
+<p>1. IA débil o estrecha
+Diseñada para una tarea específica (como recomendar películas).</p>
+<p>2. IA general (AGI)
+Sería una IA con inteligencia similar a la humana en múltiples áreas (todavía no existe).</p>
+
+<h2>IA más conocidas</h2>
+
+<div class="contenedor">
+    <p>ChatGPT</p>
+    <img src="https://tse2.mm.bing.net/th/id/OIP.7fJISUf2BCHUmnnWOJ1kXgHaC5?rs=1&pid=ImgDetMain&o=7&rm=3" alt="chatgpt">
+</div>
+<p>– IA conversacional desarrollada por OpenAI.</p>
+
+<div class="contenedor">
+    <p>GEMINI</p>
+    <img src="https://logos-world.net/wp-content/uploads/2025/02/Google-Gemini-Logo-500x281.png" alt="gemini">
+</div>
+<p>– IA de Google.</p>
+
+<div class="contenedor">
+    <p>Copilot</p>
+    <img src="https://th.bing.com/th/id/OIP.dITXq3O3DCeBxBaf-j8RWQHaHa?w=163&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Copilot">
+</div>
+<p>– Asistente de Microsoft integrado en Windows y Office.</p>
+
+<div class="contenedor">
+    <p>Siri</p>
+    <img src="https://th.bing.com/th/id/OIP.8Kgjzhbr0KkS8GdKhnTdQAHaE8?w=268&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Siri">
+</div>
+<p>– Asistente virtual de Apple.</p>
+
+<div class="contenedor">
+    <p>ALEXA</p>
+    <img src="https://th.bing.com/th/id/OIP.56l_fz8BleWE3hHlh2gJ2AHaEK?w=283&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="ALEXA">
+</div>
+<p>– Asistente de voz de Amazon.</p>
+
+</body>
+</html>
