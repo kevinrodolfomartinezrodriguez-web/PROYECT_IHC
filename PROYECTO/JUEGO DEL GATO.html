@@ -1,0 +1,310 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Juego del Gato</title>
+<style>
+body {
+    font-family: 'Cascadia Code', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #d4c1a5, #bfa176);
+}
+
+.menu-hamburguesa {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 35px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-hamburguesa span {
+    display: block;
+    height: 4px;
+    background-color: black;
+    border-radius: 2px;
+}
+
+.menu-opciones {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 240px;
+    height: 100%;
+    background: white;
+    padding-top: 80px;
+    transition: 0.4s;
+    z-index: 999;
+    list-style: none;
+}
+
+.menu-opciones.activo {
+    left: 0;
+}
+
+.menu-opciones li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.menu-opciones li a:hover {
+    background-color: #f0f0f0;
+}
+
+.reloj {
+    text-align: center;
+    margin-top: 10px;
+    background: black;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.logo-lateral{
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    text-align: center;
+}
+
+.logo-lateral img{
+    width:100%;
+}
+
+.texto-vertical{
+    margin-top:10px;
+    font-weight:bold;
+    color:black;
+    font-size:18px;
+}
+
+h1 {
+    color: #8b5e3c;
+    margin: 70px 0 10px 0;
+}
+
+.modo button {
+    padding: 8px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    background-color: #8b5e3c;
+    color: white;
+    cursor: pointer;
+}
+
+.tablero {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 5px;
+}
+
+.celda {
+    width: 100px;
+    height: 100px;
+    background-color: #f2e2c4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#mensaje {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #8b5e3c;
+}
+
+#reiniciar {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #8b5e3c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="menu-hamburguesa" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<ul class="menu-opciones" id="menuOpciones">
+    <li><a href="IA_EN_LA_IHC.html">Inteligencias Artificiales</a></li>
+    <li><a href="CHAT GPT.html">Chat GPT</a></li>
+    <li><a href="Gemini.html">GEMINI</a></li>
+    <li><a href="COPILOT.html">Copilot</a></li>
+    <li><a href="ALEXA.html">Alexa</a></li>
+    <li><a href="JUEGO DEL GATO.html">Juego del Gato</a></li>
+</ul>
+
+<div class="logo-lateral">
+<img src="Logoo.jpeg">
+<div class="texto-vertical">
+I<br>N<br>T<br>E<br>L<br>I<br>G<br>E<br>N<br>C<br>I<br>A<br>*<br>A<br>R<br>T<br>I<br>F<br>I<br>C<br>I<br>A<br>L
+</div>
+</div>
+
+<div class="reloj" id="reloj"></div>
+
+<h1>Juego del Gato</h1>
+
+<div class="modo">
+    <button onclick="seleccionarModo(1)">1 Jugador</button>
+    <button onclick="seleccionarModo(2)">2 Jugadores</button>
+</div>
+
+<div class="tablero" id="tablero">
+    <div class="celda" data-index="0"></div>
+    <div class="celda" data-index="1"></div>
+    <div class="celda" data-index="2"></div>
+    <div class="celda" data-index="3"></div>
+    <div class="celda" data-index="4"></div>
+    <div class="celda" data-index="5"></div>
+    <div class="celda" data-index="6"></div>
+    <div class="celda" data-index="7"></div>
+    <div class="celda" data-index="8"></div>
+</div>
+
+<div id="mensaje"></div>
+<button id="reiniciar">Reiniciar Juego</button>
+
+<script>
+function toggleMenu(){
+    document.getElementById("menuOpciones").classList.toggle("activo");
+}
+
+document.addEventListener("click", function(e) {
+    const menu = document.getElementById("menuOpciones");
+    const boton = document.querySelector(".menu-hamburguesa");
+    if (!menu.contains(e.target) && !boton.contains(e.target)) {
+        menu.classList.remove("activo");
+    }
+});
+
+function actualizarHora() {
+    const ahora = new Date();
+    let h = ahora.getHours().toString().padStart(2, '0');
+    let m = ahora.getMinutes().toString().padStart(2, '0');
+    let s = ahora.getSeconds().toString().padStart(2, '0');
+    document.getElementById("reloj").textContent = h + ":" + m + ":" + s;
+}
+setInterval(actualizarHora, 1000);
+actualizarHora();
+
+const celdas = document.querySelectorAll('.celda');
+const mensaje = document.getElementById('mensaje');
+const reiniciar = document.getElementById('reiniciar');
+
+let jugadorActual = 'X';
+let juegoActivo = false;
+let estadoTablero = ["", "", "", "", "", "", "", "", ""];
+let modo = 2;
+
+const combinacionesGanadoras = [
+    [0,1,2], [3,4,5], [6,7,8],
+    [0,3,6], [1,4,7], [2,5,8],
+    [0,4,8], [2,4,6]
+];
+
+function seleccionarModo(m) {
+    modo = m;
+    reiniciarJuego();
+    juegoActivo = true;
+    mensaje.textContent = `Modo ${modo === 1 ? "1 Jugador" : "2 Jugadores"} - Turno de ${jugadorActual}`;
+}
+
+function manejarClick(e) {
+    const celda = e.target;
+    const index = parseInt(celda.getAttribute('data-index'));
+
+    if (estadoTablero[index] !== "" || !juegoActivo) return;
+
+    estadoTablero[index] = jugadorActual;
+    celda.textContent = jugadorActual;
+
+    if (verificarGanador()) return;
+
+    cambiarTurno();
+
+    if (modo === 1 && jugadorActual === 'O') {
+        setTimeout(jugadaComputadora, 500);
+    }
+}
+
+function jugadaComputadora() {
+    let libres = estadoTablero.map((v, i) => v === "" ? i : null).filter(v => v !== null);
+    let random = libres[Math.floor(Math.random() * libres.length)];
+
+    estadoTablero[random] = jugadorActual;
+    celdas[random].textContent = jugadorActual;
+
+    if (verificarGanador()) return;
+
+    cambiarTurno();
+}
+
+function cambiarTurno() {
+    jugadorActual = jugadorActual === 'X' ? 'O' : 'X';
+    mensaje.textContent = `Turno de ${jugadorActual}`;
+}
+
+function verificarGanador() {
+    for (let comb of combinacionesGanadoras) {
+        const [a,b,c] = comb;
+        if (estadoTablero[a] && estadoTablero[a] === estadoTablero[b] && estadoTablero[a] === estadoTablero[c]) {
+            mensaje.textContent = `¡${jugadorActual} gana!`;
+            juegoActivo = false;
+            return true;
+        }
+    }
+
+    if (!estadoTablero.includes("")) {
+        mensaje.textContent = "¡Empate!";
+        juegoActivo = false;
+        return true;
+    }
+
+    return false;
+}
+
+function reiniciarJuego() {
+    estadoTablero = ["", "", "", "", "", "", "", "", ""];
+    jugadorActual = 'X';
+    juegoActivo = true;
+    mensaje.textContent = `Turno de ${jugadorActual}`;
+    celdas.forEach(c => c.textContent = '');
+}
+
+celdas.forEach(celda => celda.addEventListener('click', manejarClick));
+reiniciar.addEventListener('click', reiniciarJuego);
+</script>
+
+</body>
+</html>

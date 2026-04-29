@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>IA EN LA INTERACCION HUMANO-MAQUINA</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0a2a43, #00569D, #0f2027);
+    color: #e6f1ff;
+    font-size:14px;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+.botones-flotantes {
+    position: fixed;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 3000;
+}
+
+.boton-float {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #000;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    transition: 0.3s;
+}
+
+.boton-float:hover {
+    transform: scale(1.15);
+}
+
+/* colores individuales */
+.boton-detener {
+    background: #ff2d2d;
+}
+
+.boton-voz {
+    background: #000;
+}
+
+.boton-seleccion {
+    background: #000;
+}
+
+.boton-formulario {
+    background: #000;
+}
+
+.boton-gmail {
+    background: linear-gradient(135deg, #ff5f6d, #ffc371);
+}
+.boton-gmail:hover {
+    transform: scale(1.1);
+}
+.boton-gmail {
+    background: linear-gradient(135deg, #ff5f6d, #ffc371);
+}
+.boton-gmail:hover {
+    transform: scale(1.15);
+}
+
+.reloj {
+    text-align: center;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #00d4ff, #0072ff);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0,212,255,0.4);
+}
+
+.contenido {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 25px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+h1 {
+    background: linear-gradient(90deg, #00d4ff, #4facfe);
+    -webkit-background-clip: text;
+    color: transparent;
+    border-bottom: none;
+}
+h2, h3 {
+    color: #4facfe;
+}
+
+.contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.05);
+    transition: 0.3s;
+}
+.contenedor:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,212,255,0.2);
+}
+.contenedor img {
+    width: 200px;
+    border-radius: 12px;
+}
+
+.buscador input {
+    padding: 10px;
+    width: 60%;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+}
+.buscador button {
+    padding: 10px 15px;
+    border: none;
+    background: linear-gradient(135deg, #00d4ff, #0072ff);
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.buscador button:hover {
+    transform: scale(1.1);
+}
+
+mark {
+    background: #00d4ff;
+    color: black;
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+
+a {
+    color: #4facfe;
+    text-decoration: none;
+}
+a:hover {
+    text-shadow: 0 0 5px #00d4ff;
+}
+
+.menu-hamburguesa span {
+    background-color: #00d4ff;
+}
+
+.menu-opciones {
+    background: rgba(0,0,0,0.9);
+    border: none;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+.menu-opciones li a {
+    color: white;
+}
+.menu-opciones li a:hover {
+    background-color: rgba(0,212,255,0.2);
+}
+
+/* LOGO */
+.logo-lateral {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    text-align: center;
+}
+
+.logo-lateral img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,212,255,0.5); /* azul brillante */
+    transition: 0.3s;
+}
+
+.logo-lateral img:hover {
+    transform: scale(1.1);
+}
+
+.texto-vertical {
+    color: #00d4ff; /* azul principal */
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #00d4ff;
+}
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 220px;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(10px);
+    padding-top: 80px;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+.menu-lateral a {
+    display: block;
+    color: white;
+    padding: 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.menu-lateral a:hover {
+    background: rgba(0,212,255,0.2);
+}
+
+.menu-lateral.activo {
+    left: 0;
+}
+
+.menu-hamburguesa {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.menu-hamburguesa span {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background: #00d4ff;
+    margin: 5px 0;
+}
+</style>
+</head>
+<body>
+
+ <div class="logo-lateral">
+<img src="Logoo.jpeg" alt="logo">
+<div class="texto-vertical">
+I<br>
+N<br>
+T<br>
+E<br>
+L<br>
+I<br>
+G<br>
+E<br>
+N<br>
+C<br>
+I<br>
+A<br>
+*<br>
+A<br>
+R<br>
+T<br>
+I<br>
+F<br>
+I<br>
+C<br>
+I<br>
+A<br>
+L
+</div>
+</div>   
+
+
+<div class="menu-lateral" id="menu">
+     <ul class="menu-opciones" id="menuOpciones" aria-label="Opciones de navegación">
+        <li><a href="IA_EN_LA_IHC.html" target="_self">Inteligencias Artificiales</a></li>
+        <li><a href="CHAT GPT.html" target="_self" rel="noopener noreferrer">Chat GPT</a></li>
+        <li><a href="Gemini.html" target="_self" rel="noopener noreferrer">GEMINI</a></li>
+        <li><a href="COPILOT.html" target="_self" rel="noopener noreferrer">Copilot</a></li>
+        <li><a href="ALEXA.html" target="_self" rel="noopener noreferrer">Alexa</a></li>
+        <li><a href="JUEGO DEL GATO.html" target="_self">Juego del Gato</a></li>
+    </ul>
+</div>
+
+<div class="menu-hamburguesa" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+</div>
+
+<div class="contenido">
+<div class="reloj" id="reloj"></div>
+<div class="buscador">
+    <input type="text" id="buscarTexto" placeholder="Buscar palabra clave...">
+    <button onclick="buscar()">Buscar</button>
+</div>    
+
+<h1>INTELIGENCIA ARTIFICIAL (IA)</h1>
+
+<h2>¿QUE ES LA IA?</h2>
+<div class="contenedor">
+    <img src="https://th.bing.com/th/id/OIP.uZcVAR9mfrLcAikLxFtviQHaEO?w=318&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="IA">
+    <p>La IA (inteligencia artificial) es la tecnología que permite que las máquinas imiten ciertas capacidades humanas como aprender, razonar, reconocer imágenes, entender lenguaje y tomar decisiones.</p>
+</div>
+
+<h3>¿Cómo funciona?</h3>
+<div class="contenedor">
+    <p>La IA utiliza principalmente algoritmos, datos y modelos de aprendizaje automático (machine learning). Un ejemplo importante es ChatGPT, que usa grandes cantidades de texto para aprender patrones del lenguaje y poder conversar.</p>
+    <img src="https://th.bing.com/th/id/OIP.2Ja11QEE48-i5lpcuBVctQHaDh?w=264&h=166&c=7&r=0&o=7&pid=1.7&rm=3" alt="IA2">
+</div>
+
+<h3>Ejemplos de IA en la vida diaria</h3>
+<div class="contenedor">
+<p>* Asistentes virtuales como Siri o Alexa</p>
+<p>* Reconocimiento facial en el celular</p>
+<p>* Traducción automática</p>
+<p>* Recomendaciones de Netflix</p>
+</div>
+
+<img src="https://th.bing.com/th/id/OIP.eEauSbBRTz0SqF8XPBMqiwHaFQ?w=222&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="IA3">
+
+<h2>Tipos de IA</h2>
+<p>1. IA débil o estrecha: Diseñada para una tarea específica (como recomendar películas).</p>
+<p>2. IA general (AGI): Sería una IA con inteligencia similar a la humana en múltiples áreas (todavía no existe).</p>
+
+<h2>PRIMERAS IA</h2>
+<div class="contenedor">
+<p>El Logic Theorist fue desarrollado en 1955–1956 por Allen Newell y Herbert A. Simon, con la colaboración de J. C. Shaw. Está considerado el primer programa de inteligencia artificial de la historia, ya que podía resolver problemas que normalmente requerían razonamiento humano.
+
+El objetivo principal del Logic Theorist era demostrar teoremas matemáticos de la lógica proposicional, en particular los del libro Principia Mathematica de Alfred North Whitehead y Bertrand Russell. El programa no pensaba como un humano, pero imitaba un proceso lógico paso a paso: analizaba un problema, exploraba posibles soluciones y seleccionaba los pasos más prometedores hasta llegar a la demostración correcta.</p>
+</div>
+
+<img src="https://th.bing.com/th/id/OIP.qTFbSbCQIxFAI8mGTvwtagHaFa?w=254&h=185&c=7&r=0&o=7&pid=1.7&rm=3" alt="1IA">
+
+<p>Algunos datos importantes sobre el Logic Theorist:</p>
+
+<p>* Fue capaz de demostrar 38 de los 52 teoremas del Principia Mathematica, y en algunos casos encontraba demostraciones más elegantes que las originales.</p>
+
+<p>* Usaba un enfoque que hoy se conoce como búsqueda heurística, evaluando cuáles caminos eran más prometedores para resolver un problema.</p>
+
+<p>* Fue presentado por primera vez en 1956, en la Conferencia de Dartmouth, que se considera el nacimiento formal del campo de la inteligencia artificial.</p>
+
+<p>El Logic Theorist marcó un hito porque demostró que las computadoras podían realizar tareas consideradas “inteligentes”, como la resolución de problemas complejos, y sentó las bases para futuros programas de IA, desde sistemas expertos hasta algoritmos de aprendizaje automático.</p>
+<img src="https://d3i71xaburhd42.cloudfront.net/9923ff1af7ca9334708b27eebcd6aca5e53a5466/3-Table2-1.png" width="750" height="650" alt="111ia" >
+
+<h2>¿POR QUE UTILIZAR IA?</h2>
+<div class="contenedor">
+<P>Las inteligencias artificiales (IA) ofrecen múltiples beneficios en diferentes áreas. Permiten automatizar tareas repetitivas, mejorar la precisión y rapidez en procesos, y liberar tiempo para actividades más creativas o estratégicas. Facilitan la toma de decisiones al analizar grandes cantidades de datos y detectar patrones que podrían pasar desapercibidos. También permiten personalizar servicios y productos según las necesidades de cada usuario, como recomendaciones en plataformas digitales o asistentes virtuales. Además, impulsan la innovación en ciencia y tecnología, contribuyendo a descubrimientos, simulaciones y desarrollos en robótica y vehículos autónomos. La IA ayuda en seguridad y prevención al identificar fraudes, anomalías o riesgos, y en educación y accesibilidad al ofrecer tutorías personalizadas y herramientas para personas con discapacidades. En conjunto, la IA optimiza procesos, aumenta la productividad y abre nuevas posibilidades de innovación en casi todos los campos.</P>
+</div>
+
+<img src="https://th.bing.com/th/id/OIP.ee4v1gnNIic5ZUMWZH8p7gHaE6?w=241&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="IIII">
+
+<h2>IA más conocidas</h2>
+
+<div class="contenedor">
+    <p>ChatGPT</p>
+    <img src="https://tse2.mm.bing.net/th/id/OIP.7fJISUf2BCHUmnnWOJ1kXgHaC5?rs=1&pid=ImgDetMain&o=7&rm=3" alt="chatgpt">
+</div>
+<p>– IA conversacional desarrollada por OpenAI.</p>
+<a href="CHAT GPT.html" target="_self" rel="noopener noreferrer">CHAT GPT</a>
+
+<div class="contenedor">
+    <p>GEMINI</p>
+    <img src="https://logos-world.net/wp-content/uploads/2025/02/Google-Gemini-Logo-500x281.png" alt="gemini">
+</div>
+<p>– IA de Google.</p>
+<a href="Gemini.html" target="_self" rel="noopener noreferrer">GEMINI</a>
+
+<div class="contenedor">
+    <p>Copilot</p>
+    <img src="https://th.bing.com/th/id/OIP.dITXq3O3DCeBxBaf-j8RWQHaHa?w=163&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Copilot">
+</div>
+<p>– Asistente de Microsoft integrado en Windows y Office.</p>
+<a href="COPILOT.html" target="_self" rel="noopener noreferrer">COPILOT</a>
+
+<div class="contenedor">
+    <p>AMAZON ALEXA</p>
+    <img src="https://th.bing.com/th/id/OIP.LFXfeOQHsOgKHig407KBrAHaD4?w=294&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="ALEXA">
+</div>
+<p>– Asistente virtual desarrollado por Amazon que funciona con comandos de voz.</p>
+<a href="ALEXA.html" target="_self" rel="noopener noreferrer">ALEXA</a>
+
+<H3># Juego del Gato #</H3>
+<p>– Juego clásico de estrategia para dos jugadores. Creado con ayuda inteligencia artificial (IA)</p>
+<a href="JUEGO DEL GATO.html" target="_self">JUEGO DEL GATO</a>
+
+</div>
+
+<div class="botones-flotantes">
+
+    <div class="boton-float boton-seleccion" 
+     onmousedown="event.preventDefault(); leerSeleccion()">🎯</div>
+
+    <div class="boton-float boton-detener" onclick="detenerLectura()">⏹</div>
+
+    <div class="boton-float boton-voz" onclick="leerPagina()">🔊</div>
+
+    <a href="https://docs.google.com/forms" class="boton-float boton-formulario">📝</a>
+
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dbolonpimpon@gmail.com&su=Dudas%20y%20Sugerencias" 
+   class="boton-float boton-gmail">✉️</a>
+
+</div>
+<script>
+
+    menuBtn.addEventListener('click', () => {
+        menuOpciones.style.display = menuOpciones.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!menuBtn.contains(e.target) && !menuOpciones.contains(e.target)) {
+            menuOpciones.style.display = 'none';
+        }
+    });
+
+    menuBtn.addEventListener('keydown', (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            menuBtn.click();
+        }
+    });
+</script>
+<script>
+function buscar() {
+    let texto = document.getElementById("buscarTexto").value.toLowerCase();
+    let contenido = document.querySelector(".contenido");
+
+    // quitar resaltado previo
+    let original = contenido.innerHTML.replace(/<mark>|<\/mark>/g, "");
+    contenido.innerHTML = original;
+
+    if (texto.trim() === "") return;
+
+    let regex = new RegExp(`(${texto})`, "gi");
+    contenido.innerHTML = contenido.innerHTML.replace(regex, "<mark>$1</mark>");
+}
+</script>
+<script>
+let vozActiva = null;
+
+function leerPagina() {
+    const contenido = document.querySelector(".contenido").innerText;
+
+    hablar(contenido);
+}
+
+function leerSeleccion() {
+    speechSynthesis.cancel();
+
+    setTimeout(() => {
+        const seleccion = window.getSelection().toString().trim();
+
+        if (!seleccion) {
+            alert("Selecciona un texto primero");
+            return;
+        }
+
+        vozActiva = new SpeechSynthesisUtterance(seleccion);
+        vozActiva.lang = "es-MX";
+        vozActiva.rate = 1;
+
+        speechSynthesis.speak(vozActiva);
+    }, 100);
+}
+function hablar(texto) {
+    speechSynthesis.cancel(); // detener lo anterior
+
+    vozActiva = new SpeechSynthesisUtterance(texto);
+    vozActiva.lang = "es-MX";
+    vozActiva.rate = 1;
+
+    speechSynthesis.speak(vozActiva);
+}
+
+// ⏹ Detener lectura
+function detenerLectura() {
+    speechSynthesis.cancel();
+}
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("activo");
+}
+</script>
+<script>
+function reloj() {
+    document.getElementById("reloj").innerText = new Date().toLocaleTimeString();
+}
+
+setInterval(reloj, 1000);
+reloj();
+</script>
+</body>
+</html>
